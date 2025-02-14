@@ -13,7 +13,7 @@ import { KanbanBoard } from '$lib/kanban-board';
  */
 
 it('should pass if the two numbers would add up correctly in a language other than JavaScript', () => {
-  expect(0.2 * 10 + 0.1 * 10).toEqual(0.3 * 10);
+  expect(0.2 + 0.1).toBeCloseTo(0.3);
 });
 
 describe('createPerson', () => {
@@ -126,15 +126,16 @@ describe('Person', () => {
     expect(john.friends).toContain(paul);
   });
 
-  it.fails('will mutually remove friends', () => {
+  it('will mutually remove friends', () => {
     const john = new Person('John Lennon');
     const paul = new Person('Paul McCartney');
 
     john.addFriend(paul);
+    expect(paul.friends).toContain(john);
     john.removeFriend(paul);
 
     // Verify that paul.friends does not include john.
-    expect(paul.friends).toContain(john);
+    expect(paul.friends).not.toContain(john);
   });
 });
 
