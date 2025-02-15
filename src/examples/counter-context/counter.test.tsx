@@ -37,3 +37,17 @@ test('it should increment when the "Increment" button is pressed (again)', async
 
   expect(currentCount).toHaveTextContent('1');
 });
+
+test('it should reset the counter when the reset button is pressed', async () => {
+  const user = userEvent.setup();
+  render(<Counter />);
+
+  const currentCount = screen.getByTestId('current-count');
+  const incrementButton = screen.getByRole('button', { name: 'Increment' });
+  const resetButton = screen.getByRole('button', { name: 'Reset' });
+
+  await user.click(incrementButton);
+  expect(currentCount).toHaveTextContent('1');
+  await user.click(resetButton);
+  expect(currentCount).toHaveTextContent('0');
+});

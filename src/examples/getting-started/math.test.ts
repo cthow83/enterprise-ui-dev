@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { add, subtract, multiply, divide } from './math';
+import { add, subtract, multiply, divide, sum, average } from './math';
 
 describe('add', () => {
   it('should add two numbers correctly', () => {
@@ -38,5 +38,25 @@ describe('divide', () => {
 
   it('should not multiply two numbers incorrectly', () => {
     expect(multiply(4, 2)).not.toBe(1000);
+  });
+});
+
+describe('sum', () => {
+  it('should sum all numbers', () => {
+    expect(sum(1, 2, 3, 4, 5)).toBe(15);
+  });
+
+  it('should not sum all numbers incorrectly', () => {
+    expect(sum(1, 2, 3, 4, 5)).not.toBe(1000);
+  });
+});
+
+describe('average', () => {
+  it('should average all numbers', () => {
+    expect(average(1, 2, 3, 4, 5)).toBe(3);
+  });
+
+  it('should not average all numbers incorrectly', () => {
+    expect(average(1, 2, 3, 4, 5)).not.toBe(1000);
   });
 });
