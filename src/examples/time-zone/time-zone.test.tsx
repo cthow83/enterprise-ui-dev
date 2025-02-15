@@ -1,12 +1,12 @@
 import { test, expect, vi } from 'vitest';
-import { render } from 'test/utilities';
+import { render, screen } from 'test/utilities';
 import TimeZone from '.';
 
 test('it should render successfully', () => {
   render(<TimeZone />);
 });
 
-test.fails('should match the snapshot', async () => {
-  const { container } = render(<TimeZone />);
-  expect(container).toMatchSnapshot();
+test('should match the snapshot', async () => {
+  render(<TimeZone />);
+  expect(screen.getByTestId('current-time').textContent).toMatch(/^\d{13}$/);
 });
