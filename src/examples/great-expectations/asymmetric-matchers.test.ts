@@ -36,7 +36,7 @@ it('include cool computer scientists by virtue of them being in the club', () =>
     expect.objectContaining({
       // expect to match a any String
       id: expect.any(String),
-      firstName: 'Grae',
+      firstName: 'Grace',
       lastName: 'Hopper',
       isCool: true,
     }),
