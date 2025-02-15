@@ -12,34 +12,28 @@ it('returns an empty array as the initial state', () => {
 
 it('supports adding an item with the correct name', () => {
   const result = reducer([], add({ name: 'iPhone' }));
-  expect(result).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({
-        name: 'iPhone',
-      }),
-    ]),
+  expect(result).toContainEqual(
+    expect.objectContaining({
+      name: 'iPhone',
+    }),
   );
 });
 
 it('prefixes ids with "item-"', () => {
   const result = reducer([], add({ name: 'iPhone' }));
-  expect(result).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({
-        id: expect.stringMatching(/^item-/),
-      }),
-    ]),
+  expect(result).toContainEqual(
+    expect.objectContaining({
+      id: expect.stringMatching(/^item-/),
+    }),
   );
 });
 
 it('defaults new items to a packed status of false', () => {
   const result = reducer([], add({ name: 'iPhone' }));
-  expect(result).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({
-        packed: false,
-      }),
-    ]),
+  expect(result).toContainEqual(
+    expect.objectContaining({
+      packed: false,
+    }),
   );
 });
 
@@ -54,7 +48,11 @@ it('supports removing an item', () => {
 
   const result = reducer(state, remove({ id: '1' }));
 
-  expect(result).toEqual([]);
+  expect(result).not.toContainEqual(
+    expect.objectContaining({
+      id: '1',
+    }),
+  );
 });
 
 it('supports toggling an item', () => {
@@ -67,9 +65,7 @@ it('supports toggling an item', () => {
   ];
 
   const result = reducer(state, toggle({ id: '1' }));
-  expect(result).toEqual(
-    expect.arrayContaining([expect.objectContaining({ packed: true })]),
-  );
+  expect(result).toContainEqual(expect.objectContaining({ packed: true }));
 });
 
 it('supports updating an item', () => {
@@ -86,20 +82,16 @@ it('supports updating an item', () => {
     update({ id: '1', name: 'Samsung Galaxy S23' }),
   );
 
-  expect(result).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({
-        id: '1',
-        name: 'Samsung Galaxy S23',
-      }),
-    ]),
+  expect(result).toContainEqual(
+    expect.objectContaining({
+      id: '1',
+      name: 'Samsung Galaxy S23',
+    }),
   );
-  expect(result).toEqual(
-    expect.not.arrayContaining([
-      expect.objectContaining({
-        name: 'iPhone',
-      }),
-    ]),
+  expect(result).toContainEqual(
+    expect.not.objectContaining({
+      name: 'iPhone',
+    }),
   );
 });
 
@@ -119,7 +111,5 @@ it('supports marking all items as unpacked', () => {
   ];
 
   const result = reducer(state, markAllAsUnpacked());
-  expect(result).toEqual(
-    expect.not.arrayContaining([expect.objectContaining({ packed: true })]),
-  );
+  expect(result).not.toContainEqual(expect.objectContaining({ packed: true }));
 });

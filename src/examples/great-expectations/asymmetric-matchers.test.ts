@@ -1,5 +1,5 @@
 import { v4 as id } from 'uuid';
-import { expect, it } from 'vitest';
+import { expect, expectTypeOf, it } from 'vitest';
 
 type ComputerScientist = {
   id: string;
@@ -17,11 +17,28 @@ const addToCoolKidsClub = (p: ComputerScientist, club: unknown[]) => {
   club.push({ ...p, isCool: true });
 };
 
-it('include cool computer scientists by virtue of them being in the club', () => {
+test('include cool computer scientists by virtue of them being in the club', () => {
   const people: ComputerScientist[] = [];
 
   addToCoolKidsClub(createComputerScientist('Grace', 'Hopper'), people);
   addToCoolKidsClub(createComputerScientist('Ada', 'Lovelace'), people);
   addToCoolKidsClub(createComputerScientist('Annie', 'Easley'), people);
   addToCoolKidsClub(createComputerScientist('Dorothy', 'Vaughn'), people);
+
+  people.forEach((person) => {
+    expectTypeOf(person.firstName).toEqualTypeOf<string>();
+    expectTypeOf(person.lastName).toEqualTypeOf<string>();
+    expect(person.isCool).toBe(true);
+  });
+
+  expect(people.length).toEqual(4);
+  expect(people).toContainEqual(
+    expect.objectContaining({
+      // expect to match a any String
+      id: expect.any(String),
+      firstName: 'Grace',
+      lastName: 'Hopper',
+      isCool: true,
+    }),
+  );
 });
