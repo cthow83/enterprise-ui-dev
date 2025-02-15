@@ -17,7 +17,7 @@ const addToCoolKidsClub = (p: ComputerScientist, club: unknown[]) => {
   club.push({ ...p, isCool: true });
 };
 
-test('include cool computer scientists by virtue of them being in the club', () => {
+it('include cool computer scientists by virtue of them being in the club', () => {
   const people: ComputerScientist[] = [];
 
   addToCoolKidsClub(createComputerScientist('Grace', 'Hopper'), people);
