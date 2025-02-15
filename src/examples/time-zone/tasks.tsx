@@ -7,7 +7,7 @@ export type Task = {
 export const TaskListItem = ({ title, completed, id }: Task) => {
   return (
     <li className="flex items-center gap-2">
-      <input type="checkbox" id={`task-${id}`} checked={completed} />
+      <input type="checkbox" id={`task-${id}`} checked={completed} readOnly />
       <label htmlFor={`task-${id}`}>{title}</label>
     </li>
   );
