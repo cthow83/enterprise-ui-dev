@@ -1,7 +1,6 @@
 import { render, screen, within } from 'test/utilities';
 import userEvent from '@testing-library/user-event';
 import PackingList from '.';
-import { checkPrime } from 'node:crypto';
 
 const setup = () => {
   const user = userEvent.setup();
